@@ -93,16 +93,6 @@ typedef	unsigned int	uint;		/* System V compatibility */
 typedef	unsigned long	ulong;		/* System V compatibility */
 #endif
 
-#ifndef _BLKCNT_T_DECLARED
-typedef	__blkcnt_t	blkcnt_t;
-#define	_BLKCNT_T_DECLARED
-#endif
-
-#ifndef _BLKSIZE_T_DECLARED
-typedef	__blksize_t	blksize_t;
-#define	_BLKSIZE_T_DECLARED
-#endif
-
 #if !defined(__clock_t_defined) && !defined(_CLOCK_T_DECLARED)
 typedef	_CLOCK_T_	clock_t;
 #define	__clock_t_defined
@@ -122,99 +112,6 @@ typedef	long	daddr_t;
 #ifndef __caddr_t_defined
 typedef	char *	caddr_t;
 #define __caddr_t_defined
-#endif
-
-#ifndef _FSBLKCNT_T_DECLARED		/* for statvfs() */
-typedef	__fsblkcnt_t	fsblkcnt_t;
-typedef	__fsfilcnt_t	fsfilcnt_t;
-#define	_FSBLKCNT_T_DECLARED
-#endif
-
-#ifndef _ID_T_DECLARED
-typedef	__id_t		id_t;		/* can hold a uid_t or pid_t */
-#define	_ID_T_DECLARED
-#endif
-
-#ifndef _INO_T_DECLARED
-typedef	__ino_t		ino_t;		/* inode number */
-#define	_INO_T_DECLARED
-#endif
-
-#if defined(__i386__) && (defined(GO32) || defined(__MSDOS__))
-typedef	char *		addr_t;
-typedef unsigned long vm_offset_t;
-typedef unsigned long vm_size_t;
-#endif /* __i386__ && (GO32 || __MSDOS__) */
-
-/*
- * All these should be machine specific - right now they are all broken.
- * However, for all of Cygnus' embedded targets, we want them to all be
- * the same.  Otherwise things like sizeof (struct stat) might depend on
- * how the file was compiled (e.g. -mint16 vs -mint32, etc.).
- */
-
-#ifndef _OFF_T_DECLARED
-typedef	__off_t		off_t;		/* file offset */
-#define	_OFF_T_DECLARED
-#endif
-#ifndef _DEV_T_DECLARED
-typedef	__dev_t		dev_t;		/* device number or struct cdev */
-#define	_DEV_T_DECLARED
-#endif
-#ifndef _UID_T_DECLARED
-typedef	__uid_t		uid_t;		/* user id */
-#define	_UID_T_DECLARED
-#endif
-#ifndef _GID_T_DECLARED
-typedef	__gid_t		gid_t;		/* group id */
-#define	_GID_T_DECLARED
-#endif
-
-#ifndef _PID_T_DECLARED
-typedef	__pid_t		pid_t;		/* process id */
-#define	_PID_T_DECLARED
-#endif
-
-#ifndef _KEY_T_DECLARED
-typedef	__key_t		key_t;		/* IPC key */
-#define	_KEY_T_DECLARED
-#endif
-
-#ifndef _SSIZE_T_DECLARED
-typedef _ssize_t ssize_t;
-#define	_SSIZE_T_DECLARED
-#endif
-
-#ifndef _MODE_T_DECLARED
-typedef	__mode_t	mode_t;		/* permissions */
-#define	_MODE_T_DECLARED
-#endif
-
-#ifndef _NLINK_T_DECLARED
-typedef	__nlink_t	nlink_t;	/* link count */
-#define	_NLINK_T_DECLARED
-#endif
-
-#if !defined(__clockid_t_defined) && !defined(_CLOCKID_T_DECLARED)
-typedef	__clockid_t	clockid_t;
-#define	__clockid_t_defined
-#define	_CLOCKID_T_DECLARED
-#endif
-
-#if !defined(__timer_t_defined) && !defined(_TIMER_T_DECLARED)
-typedef	__timer_t	timer_t;
-#define	__timer_t_defined
-#define	_TIMER_T_DECLARED
-#endif
-
-#ifndef _USECONDS_T_DECLARED
-typedef	__useconds_t	useconds_t;	/* microseconds (unsigned) */
-#define	_USECONDS_T_DECLARED
-#endif
-
-#ifndef _SUSECONDS_T_DECLARED
-typedef	__suseconds_t	suseconds_t;
-#define	_SUSECONDS_T_DECLARED
 #endif
 
 typedef	__int64_t	sbintime_t;
