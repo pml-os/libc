@@ -31,37 +31,43 @@ close (int fd)
 }
 
 int
-execve (char *name, char **argv, char **envp)
+execve (const char *name, char *const *argv, char *const *envp)
 {
   return do_syscall (SYS_execve, name, argv, envp);
 }
 
-int
+pid_t
 fork (void)
 {
   return do_syscall (SYS_fork);
 }
 
-int
+pid_t
 getpid (void)
 {
   return do_syscall (SYS_getpid);
 }
 
 int
-open (const char *name, int flags, int mode)
+open (const char *name, int flags, mode_t mode)
 {
-  return do_syscall (SYS_open);
+  return do_syscall (SYS_open, name, flags, mode);
 }
 
-int
-read (int fd, char *buffer, int len)
+ssize_t
+read (int fd, void *buffer, size_t len)
 {
   return do_syscall (SYS_read, fd, buffer, len);
 }
 
-int
-write (int fd, char *buffer, int len)
+ssize_t
+write (int fd, const void *buffer, size_t len)
 {
   return do_syscall (SYS_write, fd, buffer, len);
+}
+
+off_t
+lseek (int fd, off_t offset, int whence)
+{
+  return do_syscall (SYS_lseek, fd, offset, whence);
 }
