@@ -22,7 +22,13 @@ ASM_FUNC_BEGIN (do_syscall):
 	push	%rbp
 	mov	%rsp, %rbp
 
-	mov	%rcx, %r10
+	mov	%rdi, %rax
+	mov	%rsi, %rdi
+	mov	%rdx, %rsi
+	mov	%rcx, %rdx
+	mov	%r8, %r10
+	mov	%r9, %r8
+	mov	8(%rbp), %r9
 	syscall
 	jnc	.end
 
