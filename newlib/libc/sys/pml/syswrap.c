@@ -43,7 +43,7 @@ getppid (void)
 }
 
 int
-execve (const char *name, char *const *argv, char *const *envp)
+_execve (const char *name, char *const *argv, char *const *envp)
 {
   return do_syscall (SYS_execve, name, argv, envp);
 }
