@@ -71,3 +71,33 @@ lseek (int fd, off_t offset, int whence)
 {
   return do_syscall (SYS_lseek, fd, offset, whence);
 }
+
+int
+stat (const char *path, struct stat *st)
+{
+  return do_syscall (SYS_stat, path, st);
+}
+
+int
+fstat (int fd, struct stat *st)
+{
+  return do_syscall (SYS_fstat, fd, st);
+}
+
+int
+lstat (const char *path, struct stat *st)
+{
+  return do_syscall (SYS_lstat, path, st);
+}
+
+int
+link (const char *old_path, const char *new_path)
+{
+  return do_syscall (SYS_link, old_path, new_path);
+}
+
+int
+dup (int fd)
+{
+  return do_syscall (SYS_dup, fd);
+}
