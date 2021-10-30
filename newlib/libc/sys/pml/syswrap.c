@@ -18,28 +18,16 @@
 
 long do_syscall (long num, ...);
 
-void
-_exit (int status)
-{
-  do_syscall (SYS_exit, status);
-}
-
-int
-close (int fd)
-{
-  return do_syscall (SYS_close, fd);
-}
-
-int
-execve (const char *name, char *const *argv, char *const *envp)
-{
-  return do_syscall (SYS_execve, name, argv, envp);
-}
-
 pid_t
 fork (void)
 {
   return do_syscall (SYS_fork);
+}
+
+pid_t
+vfork (void)
+{
+  return do_syscall (SYS_vfork);
 }
 
 pid_t
@@ -48,10 +36,46 @@ getpid (void)
   return do_syscall (SYS_getpid);
 }
 
+pid_t
+getppid (void)
+{
+  return do_syscall (SYS_getppid);
+}
+
+int
+execve (const char *name, char *const *argv, char *const *envp)
+{
+  return do_syscall (SYS_execve, name, argv, envp);
+}
+
+void
+_exit (int status)
+{
+  do_syscall (SYS_exit, status);
+}
+
+int
+brk (void *addr)
+{
+  return do_syscall (SYS_brk, addr);
+}
+
+void *
+sbrk (ptrdiff_t incr)
+{
+  return (void *) do_syscall (SYS_sbrk, incr);
+}
+
 int
 open (const char *name, int flags, mode_t mode)
 {
   return do_syscall (SYS_open, name, flags, mode);
+}
+
+int
+close (int fd)
+{
+  return do_syscall (SYS_close, fd);
 }
 
 ssize_t
