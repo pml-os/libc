@@ -121,6 +121,12 @@ link (const char *old_path, const char *new_path)
 }
 
 int
+unlink (const char *path)
+{
+  return do_syscall (SYS_unlink, path);
+}
+
+int
 dup (int fd)
 {
   return do_syscall (SYS_dup, fd);
