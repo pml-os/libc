@@ -19,6 +19,18 @@
 	.section .text
 	.global _start
 ASM_FUNC_BEGIN (_start):
+	xor	%edi, %edi
+	test	%rsi, %rsi
+	jz	.argc_done
+
+.argc_loop:
+	mov	(%rsi,%rdi,8), %rax
+	test	%rax, %rax
+	jz	.argc_done
+	inc	%edi
+	jmp	.argc_loop
+
+.argc_done:
 	call	main
 	mov	%eax, %edi
 	call	exit
