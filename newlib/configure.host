@@ -633,7 +633,7 @@ case "${host}" in
   x86_64-*-pml*)
 	sys_dir=pml
 	#unix_dir=unix
-	posix_dir=posix	
+	posix_dir=posix
 	default_newlib_io_c99_formats="yes"
 	default_newlib_io_long_double="yes"
 	default_newlib_io_long_long="yes"

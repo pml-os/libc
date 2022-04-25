@@ -131,3 +131,21 @@ dup (int fd)
 {
   return do_syscall (SYS_dup, fd);
 }
+
+void *
+mmap (void *addr, size_t len, int prot, int flags, int fd, off_t offset)
+{
+  return (void *) do_syscall (SYS_mmap, addr, len, prot, flags, fd, offset);
+}
+
+int
+munmap (void *addr, size_t len)
+{
+  return do_syscall (SYS_munmap, addr, len);
+}
+
+int
+msync (void *addr, size_t len, int flags)
+{
+  return do_syscall (SYS_msync, addr, len, flags);
+}
