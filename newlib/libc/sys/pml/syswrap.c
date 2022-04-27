@@ -149,3 +149,33 @@ msync (void *addr, size_t len, int flags)
 {
   return do_syscall (SYS_msync, addr, len, flags);
 }
+
+int
+getrusage (int who, struct rusage *rusage)
+{
+  return do_syscall (SYS_getrusage, who, rusage);
+}
+
+pid_t
+wait (int *status)
+{
+  return wait4 (-1, status, 0, NULL);
+}
+
+pid_t
+wait3 (int *status, int flags, struct rusage *rusage)
+{
+  return wait4 (-1, status, flags, rusage);
+}
+
+pid_t
+wait4 (pid_t pid, int *status, int flags, struct rusage *rusage)
+{
+  return do_syscall (SYS_wait4, pid, status, flags, rusage);
+}
+
+pid_t
+waitpid (pid_t pid, int *status, int flags)
+{
+  return wait4 (pid, status, flags, NULL);
+}

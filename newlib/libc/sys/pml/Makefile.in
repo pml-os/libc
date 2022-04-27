@@ -68,7 +68,8 @@ CONFIG_CLEAN_VPATH_FILES =
 LIBRARIES = $(noinst_LIBRARIES)
 ARFLAGS = cru
 lib_a_AR = $(AR) $(ARFLAGS)
-@MAY_SUPPLY_SYSCALLS_TRUE@am__DEPENDENCIES_1 = syswrap.o usyscall.o
+@MAY_SUPPLY_SYSCALLS_TRUE@am__DEPENDENCIES_1 = errno.o syswrap.o \
+@MAY_SUPPLY_SYSCALLS_TRUE@	usyscall.o
 am_lib_a_OBJECTS =
 lib_a_OBJECTS = $(am_lib_a_OBJECTS)
 DEFAULT_INCLUDES = -I.@am__isrc@
@@ -198,6 +199,7 @@ AM_CCASFLAGS = $(INCLUDES)
 noinst_LIBRARIES = lib.a
 @MAY_SUPPLY_SYSCALLS_FALSE@extra_objs = 
 @MAY_SUPPLY_SYSCALLS_TRUE@extra_objs = \
+@MAY_SUPPLY_SYSCALLS_TRUE@	errno.o		\
 @MAY_SUPPLY_SYSCALLS_TRUE@	syswrap.o	\
 @MAY_SUPPLY_SYSCALLS_TRUE@	usyscall.o
 
@@ -205,6 +207,7 @@ lib_a_SOURCES =
 lib_a_LIBADD = $(extra_objs)
 EXTRA_lib_a_SOURCES = \
 	crt0.S		\
+	errno.c		\
 	syswrap.c	\
 	usyscall.S
 
@@ -288,6 +291,12 @@ lib_a-usyscall.obj: usyscall.S
 
 .c.obj:
 	$(COMPILE) -c `$(CYGPATH_W) '$<'`
+
+lib_a-errno.o: errno.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-errno.o `test -f 'errno.c' || echo '$(srcdir)/'`errno.c
+
+lib_a-errno.obj: errno.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-errno.obj `if test -f 'errno.c'; then $(CYGPATH_W) 'errno.c'; else $(CYGPATH_W) '$(srcdir)/errno.c'; fi`
 
 lib_a-syswrap.o: syswrap.c
 	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-syswrap.o `test -f 'syswrap.c' || echo '$(srcdir)/'`syswrap.c

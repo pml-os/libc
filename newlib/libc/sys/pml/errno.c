@@ -1,4 +1,4 @@
-/* usyscall.S -- This file is part of PML.
+/* errno.c -- This file is part of PML.
    Copyright (C) 2021 XNSC
 
    PML is free software: you can redistribute it and/or modify
@@ -14,29 +14,10 @@
    You should have received a copy of the GNU General Public License
    along with PML. If not, see <https://www.gnu.org/licenses/>. */
 
-#include <pml/asm.h>
+#include <errno.h>
 
-	.section .text
-	.global do_syscall
-ASM_FUNC_BEGIN (do_syscall):
-	push	%rbp
-	mov	%rsp, %rbp
-
-	mov	%rdi, %rax
-	mov	%rsi, %rdi
-	mov	%rdx, %rsi
-	mov	%rcx, %rdx
-	mov	%r8, %r10
-	mov	%r9, %r8
-	mov	8(%rbp), %r9
-	syscall
-	jnc	.end
-
-	mov	%eax, %edi
-	call	__set_errno
-	mov	$-1, %eax
-
-.end:
-	pop	%rbp
-	ret
-ASM_FUNC_END (do_syscall)
+void
+__set_errno (int e)
+{
+  errno = e;
+}

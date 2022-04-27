@@ -1,4 +1,4 @@
-/* usyscall.S -- This file is part of PML.
+/* wait.h -- This file is part of PML.
    Copyright (C) 2021 XNSC
 
    PML is free software: you can redistribute it and/or modify
@@ -14,29 +14,19 @@
    You should have received a copy of the GNU General Public License
    along with PML. If not, see <https://www.gnu.org/licenses/>. */
 
-#include <pml/asm.h>
+#ifndef __SYS_WAIT_H
+#define __SYS_WAIT_H
 
-	.section .text
-	.global do_syscall
-ASM_FUNC_BEGIN (do_syscall):
-	push	%rbp
-	mov	%rsp, %rbp
+#include <pml/wait.h>
+#include <sys/cdefs.h>
 
-	mov	%rdi, %rax
-	mov	%rsi, %rdi
-	mov	%rdx, %rsi
-	mov	%rcx, %rdx
-	mov	%r8, %r10
-	mov	%r9, %r8
-	mov	8(%rbp), %r9
-	syscall
-	jnc	.end
+__BEGIN_DECLS
 
-	mov	%eax, %edi
-	call	__set_errno
-	mov	$-1, %eax
+pid_t wait (int *status);
+pid_t wait3 (int *status, int flags, struct rusage *rusage);
+pid_t wait4 (pid_t pid, int *status, int flags, struct rusage *rusage);
+pid_t waitpid (pid_t pid, int *status, int flags);
 
-.end:
-	pop	%rbp
-	ret
-ASM_FUNC_END (do_syscall)
+__END_DECLS
+
+#endif
