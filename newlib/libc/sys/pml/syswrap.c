@@ -179,3 +179,21 @@ waitpid (pid_t pid, int *status, int flags)
 {
   return wait4 (pid, status, flags, NULL);
 }
+
+sighandler_t
+signal (int sig, sighandler_t handler)
+{
+  return do_syscall (SYS_signal, sig, handler);
+}
+
+int
+sigaction (int sig, const struct sigaction *act, struct sigaction *old_act)
+{
+  return do_syscall (SYS_sigaction, sig, act, old_act);
+}
+
+int
+kill (pid_t pid, int sig)
+{
+  return do_syscall (SYS_kill, pid, sig);
+}

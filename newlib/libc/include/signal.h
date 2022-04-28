@@ -7,18 +7,6 @@
 
 _BEGIN_STD_C
 
-typedef int	sig_atomic_t;		/* Atomic entity type (ANSI) */
-#if __BSD_VISIBLE
-typedef _sig_func_ptr sig_t;		/* BSD naming */
-#endif
-#if __GNU_VISIBLE
-typedef _sig_func_ptr sighandler_t;	/* glibc naming */
-#endif
-
-#define SIG_DFL ((_sig_func_ptr)0)	/* Default action */
-#define SIG_IGN ((_sig_func_ptr)1)	/* Ignore action */
-#define SIG_ERR ((_sig_func_ptr)-1)	/* Error return */
-
 struct _reent;
 
 _sig_func_ptr _signal_r (struct _reent *, int, _sig_func_ptr);

@@ -631,6 +631,7 @@ case "${host}" in
 	sys_dir=w65
 	;;
   x86_64-*-pml*)
+	newlib_cflags="${newlib_cflags} -DSIGNAL_PROVIDED"
 	sys_dir=pml
 	#unix_dir=unix
 	posix_dir=posix
