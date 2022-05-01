@@ -95,17 +95,6 @@ int sigemptyset (sigset_t *);
 int sigpending (sigset_t *);
 int sigsuspend (const sigset_t *);
 int sigwait (const sigset_t *, int *);
-
-#if !defined(__CYGWIN__) && !defined(__rtems__)
-/* These depend upon the type of sigset_t, which right now 
-   is always a long.. They're in the POSIX namespace, but
-   are not ANSI. */
-#define sigaddset(what,sig) (*(what) |= (1<<(sig)), 0)
-#define sigdelset(what,sig) (*(what) &= ~(1<<(sig)), 0)
-#define sigemptyset(what)   (*(what) = 0, 0)
-#define sigfillset(what)    (*(what) = ~(0), 0)
-#define sigismember(what,sig) (((*(what)) & (1<<(sig))) != 0)
-#endif /* !__CYGWIN__ && !__rtems__ */
 #endif /* __POSIX_VISIBLE */
 
 /* There are two common sigpause variants, both of which take an int argument.
