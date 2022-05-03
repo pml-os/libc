@@ -15,6 +15,7 @@
    along with PML. If not, see <https://www.gnu.org/licenses/>. */
 
 #include <pml/syscall.h>
+#include <sys/wait.h>
 
 long do_syscall (long num, ...);
 
@@ -40,6 +41,120 @@ pid_t
 getppid (void)
 {
   return do_syscall (SYS_getppid);
+}
+
+pid_t
+gettid (void)
+{
+  return do_syscall (SYS_gettid);
+}
+
+pid_t
+getpgid (pid_t pid)
+{
+  return do_syscall (SYS_getpgid, pid);
+}
+
+int
+setpgid (pid_t pid, pid_t pgid)
+{
+  return do_syscall (SYS_setpgid, pid, pgid);
+}
+
+pid_t
+getpgrp (void)
+{
+  return do_syscall (SYS_getpgrp);
+}
+
+int
+setpgrp (void)
+{
+  return do_syscall (SYS_setpgrp);
+}
+
+uid_t
+getuid (void)
+{
+  return do_syscall (SYS_getuid);
+}
+
+int
+setuid (uid_t uid)
+{
+  return do_syscall (SYS_setuid, uid);
+}
+
+uid_t
+geteuid (void)
+{
+  return do_syscall (SYS_geteuid);
+}
+
+int
+seteuid (uid_t euid)
+{
+  return do_syscall (SYS_seteuid, euid);
+}
+
+int
+setreuid (uid_t ruid, uid_t euid)
+{
+  return do_syscall (SYS_setreuid, ruid, euid);
+}
+
+int
+getresuid (uid_t *ruid, uid_t *euid, uid_t *suid)
+{
+  return do_syscall (SYS_getresuid, ruid, euid, suid);
+}
+
+int
+setresuid (uid_t ruid, uid_t euid, uid_t suid)
+{
+  return do_syscall (SYS_setresuid, ruid, euid, suid);
+}
+
+gid_t
+getgid (void)
+{
+  return do_syscall (SYS_getgid);
+}
+
+int
+setgid (gid_t gid)
+{
+  return do_syscall (SYS_setgid, gid);
+}
+
+gid_t
+getegid (void)
+{
+  return do_syscall (SYS_getegid);
+}
+
+int
+setegid (gid_t egid)
+{
+  return do_syscall (SYS_setegid, egid);
+}
+
+int
+setregid (gid_t rgid, gid_t egid)
+{
+  return do_syscall (SYS_setregid, rgid, egid);
+}
+
+int
+getresgid (gid_t *rgid, gid_t *egid, gid_t *sgid)
+{
+  return do_syscall (SYS_getresgid, rgid, egid, sgid);
+}
+
+int
+setresgid (gid_t rgid, gid_t egid, gid_t sgid)
+{
+  return do_syscall (SYS_setresgid, rgid, egid, sgid);
 }
 
 int
@@ -183,7 +298,7 @@ waitpid (pid_t pid, int *status, int flags)
 sighandler_t
 signal (int sig, sighandler_t handler)
 {
-  return do_syscall (SYS_signal, sig, handler);
+  return (sighandler_t) do_syscall (SYS_signal, sig, handler);
 }
 
 int
