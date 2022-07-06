@@ -33,6 +33,9 @@
 #ifndef _SYS_SYSLIMITS_H_
 #define _SYS_SYSLIMITS_H_
 
+#include <pml/syslimits.h>
+
+#if 0
 #define	ARG_MAX			65536	/* max bytes for an exec function */
 #ifndef CHILD_MAX
 #define	CHILD_MAX		   40	/* max simultaneous processes */
@@ -57,5 +60,6 @@
 #define	EXPR_NEST_MAX		   32	/* max expressions nested in expr(1) */
 #define	LINE_MAX		 2048	/* max bytes in an input line */
 #define	RE_DUP_MAX		  255	/* max RE's in interval notation */
+#endif
 
 #endif
