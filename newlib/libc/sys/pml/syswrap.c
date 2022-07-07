@@ -230,6 +230,18 @@ lstat (const char *path, struct stat *st)
 }
 
 int
+mkdir (const char *path, mode_t mode)
+{
+  return do_syscall (SYS_mkdir, path, mode);
+}
+
+int
+rename (const char *old_path, const char *new_path)
+{
+  return do_syscall (SYS_rename, old_path, new_path);
+}
+
+int
 link (const char *old_path, const char *new_path)
 {
   return do_syscall (SYS_link, old_path, new_path);
@@ -239,6 +251,24 @@ int
 unlink (const char *path)
 {
   return do_syscall (SYS_unlink, path);
+}
+
+int
+symlink (const char *old_path, const char *new_path)
+{
+  return do_syscall (SYS_symlink, old_path, new_path);
+}
+
+ssize_t
+readlink (const char *path, char *buffer, size_t len)
+{
+  return do_syscall (SYS_readlink, path, buffer, len);
+}
+
+int
+truncate (const char *path, off_t len)
+{
+  return do_syscall (SYS_truncate, path, len);
 }
 
 int
