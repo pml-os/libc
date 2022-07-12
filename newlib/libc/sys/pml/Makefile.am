@@ -7,7 +7,9 @@ noinst_LIBRARIES = lib.a
 if MAY_SUPPLY_SYSCALLS
 extra_objs =		\
 	errno.o		\
+	sigset.o	\
 	syswrap.o	\
+	termios.o	\
 	usyscall.o
 else
 extra_objs =
@@ -18,7 +20,9 @@ lib_a_LIBADD = $(extra_objs)
 EXTRA_lib_a_SOURCES =	\
 	crt0.S		\
 	errno.c		\
+	sigset.c	\
 	syswrap.c	\
+	termios.c	\
 	usyscall.S
 lib_a_DEPENDENCIES = $(extra_objs)
 lib_a_CCASFLAGS = $(AM_CCASFLAGS)

@@ -14,8 +14,11 @@
    You should have received a copy of the GNU General Public License
    along with PML. If not, see <https://www.gnu.org/licenses/>. */
 
+#include <pml/fcntl.h>
 #include <pml/syscall.h>
 #include <sys/wait.h>
+#include <errno.h>
+#include <limits.h>
 
 long do_syscall (long num, ...);
 
@@ -236,7 +239,7 @@ mkdir (const char *path, mode_t mode)
 }
 
 int
-rename (const char *old_path, const char *new_path)
+_rename (const char *old_path, const char *new_path)
 {
   return do_syscall (SYS_rename, old_path, new_path);
 }
@@ -271,10 +274,53 @@ truncate (const char *path, off_t len)
   return do_syscall (SYS_truncate, path, len);
 }
 
+void
+sync (void)
+{
+  do_syscall (SYS_sync);
+}
+
+int
+fsync (int fd)
+{
+  return do_syscall (SYS_fsync, fd);
+}
+
 int
 dup (int fd)
 {
   return do_syscall (SYS_dup, fd);
+}
+
+int
+fcntl (int fd, int cmd, void *arg)
+{
+  return do_syscall (SYS_fcntl, fd, cmd, arg);
+}
+
+int
+dup2 (int fd, int fd2)
+{
+  int save;
+  if (fd2 < 0 || fd2 >= OPEN_MAX)
+    {
+      errno = EBADF;
+      return -1;
+    }
+  if (fcntl (fd, F_GETFL, NULL) < 0)
+    return -1;
+  if (fd == fd2)
+    return fd2;
+  save = errno;
+  close (fd2);
+  errno = save;
+  return fcntl (fd, F_DUPFD, (void *) (long) fd2);
+}
+
+int
+ioctl (int fd, unsigned long req, void *arg)
+{
+  return do_syscall (SYS_ioctl, fd, req, arg);
 }
 
 void *
@@ -341,4 +387,10 @@ int
 kill (pid_t pid, int sig)
 {
   return do_syscall (SYS_kill, pid, sig);
+}
+
+int
+killpg (pid_t pgrp, int sig)
+{
+  return do_syscall (SYS_killpg, pgrp, sig);
 }
