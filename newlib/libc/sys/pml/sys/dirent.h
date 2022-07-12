@@ -31,4 +31,6 @@ struct __DIR
 
 typedef struct __DIR DIR;
 
+#define __dirfd(dp)             ((dp)->dd_fd)
+
 #endif
