@@ -34,7 +34,7 @@ ASM_FUNC_BEGIN (do_syscall):
 
 	mov	%eax, %edi
 	call	__set_errno
-	mov	$-1, %eax
+	mov	$-1, %rax
 
 .end:
 	pop	%rbp

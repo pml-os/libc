@@ -287,9 +287,27 @@ fsync (int fd)
 }
 
 int
+chdir (const char *path)
+{
+  return do_syscall (SYS_chdir, path);
+}
+
+int
+fchdir (int fd)
+{
+  return do_syscall (SYS_fchdir, fd);
+}
+
+int
 dup (int fd)
 {
   return do_syscall (SYS_dup, fd);
+}
+
+int
+pipe (int fds[2])
+{
+  return do_syscall (SYS_pipe, fds);
 }
 
 int

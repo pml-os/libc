@@ -112,6 +112,11 @@
 #define _POINTER_INT short
 #endif
 
+#ifdef __pml__
+#define _READ_WRITE_RETURN_TYPE _ssize_t
+#define _READ_WRITE_BUFSIZE_TYPE size_t
+#endif
+
 #if defined(__v850) && !defined(__rtems__)
 #define __ATTRIBUTE_IMPURE_PTR__ __attribute__((__sda__))
 #endif
