@@ -161,6 +161,18 @@ setresgid (gid_t rgid, gid_t egid, gid_t sgid)
 }
 
 int
+getgroups (int size, gid_t *list)
+{
+  return do_syscall (SYS_getgroups, size, list);
+}
+
+int
+setgroups (size_t size, const gid_t *list)
+{
+  return do_syscall (SYS_setgroups, size, list);
+}
+
+int
 _execve (const char *name, char *const *argv, char *const *envp)
 {
   return do_syscall (SYS_execve, name, argv, envp);
