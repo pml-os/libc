@@ -316,6 +316,12 @@ fchdir (int fd)
   return do_syscall (SYS_fchdir, fd);
 }
 
+ssize_t
+getdents (int fd, void *dirp, size_t len)
+{
+  return do_syscall (SYS_getdents, fd, dirp, len);
+}
+
 int
 dup (int fd)
 {
