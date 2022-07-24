@@ -631,7 +631,7 @@ case "${host}" in
 	sys_dir=w65
 	;;
   x86_64-*-pml*)
-	newlib_cflags="${newlib_cflags} -DSIGNAL_PROVIDED -DHAVE_RENAME"
+	newlib_cflags="${newlib_cflags} -DSIGNAL_PROVIDED -DHAVE_RENAME -DHAVE_FCNTL -DHAVE_BLKSIZE -DHAVE_NANOSLEEP -D_COMPILING_NEWLIB"
 	sys_dir=pml
 	unix_dir=unix
 	posix_dir=posix

@@ -184,6 +184,12 @@ sbrk (ptrdiff_t incr)
   return (void *) do_syscall (SYS_sbrk, incr);
 }
 
+mode_t
+umask (mode_t mask)
+{
+  return do_syscall (SYS_umask, mask);
+}
+
 int
 open (const char *name, int flags, mode_t mode)
 {
@@ -399,6 +405,30 @@ int
 sigaction (int sig, const struct sigaction *act, struct sigaction *old_act)
 {
   return do_syscall (SYS_sigaction, sig, act, old_act);
+}
+
+int
+sigprocmask (int how, const sigset_t *set, sigset_t *old_set)
+{
+  return do_syscall (SYS_sigprocmask, how, set, old_set);
+}
+
+int
+nanosleep (const struct timespec *req, struct timespec *rem)
+{
+  return do_syscall (SYS_nanosleep, req, rem);
+}
+
+int
+pause (void)
+{
+  return do_syscall (SYS_pause);
+}
+
+int
+sigsuspend (const sigset_t *mask)
+{
+  return do_syscall (SYS_sigsuspend, mask);
 }
 
 int
