@@ -460,3 +460,21 @@ killpg (pid_t pgrp, int sig)
 {
   return do_syscall (SYS_killpg, pgrp, sig);
 }
+
+int
+gethostname (char *name, size_t len)
+{
+  return do_syscall (SYS_gethostname, name, len);
+}
+
+int
+sethostname (const char *name, size_t len)
+{
+  return do_syscall (SYS_sethostname, name, len);
+}
+
+int
+uname (struct utsname *buffer)
+{
+  return do_syscall (SYS_uname, buffer);
+}
