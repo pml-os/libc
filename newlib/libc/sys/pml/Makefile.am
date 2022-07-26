@@ -7,6 +7,7 @@ noinst_LIBRARIES = lib.a
 if MAY_SUPPLY_SYSCALLS
 extra_objs =		\
 	errno.o		\
+	fts.o		\
 	sigset.o	\
 	syswrap.o	\
 	termios.o	\
@@ -20,6 +21,7 @@ lib_a_LIBADD = $(extra_objs)
 EXTRA_lib_a_SOURCES =	\
 	crt0.S		\
 	errno.c		\
+	fts.c		\
 	sigset.c	\
 	syswrap.c	\
 	termios.c	\
