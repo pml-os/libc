@@ -1,4 +1,4 @@
-/* crt0.S -- This file is part of PML.
+/* err.h -- This file is part of PML.
    Copyright (C) 2021 XNSC
 
    PML is free software: you can redistribute it and/or modify
@@ -14,28 +14,18 @@
    You should have received a copy of the GNU General Public License
    along with PML. If not, see <https://www.gnu.org/licenses/>. */
 
-#include <pml/asm.h>
+#ifndef __ERR_H
+#define __ERR_H
 
-	.section .text
-	.global _start
-ASM_FUNC_BEGIN (_start):
-	xor	%edi, %edi
-	test	%rsi, %rsi
-	jz	.no_argv
+#include <stdarg.h>
 
-.argc_loop:
-	mov	(%rsi,%rdi,8), %rax
-	test	%rax, %rax
-	jz	.argc_done
-	inc	%edi
-	jmp	.argc_loop
+void vwarn (const char *fmt, va_list args);
+void vwarnx (const char *fmt, va_list args);
+void warn (const char *fmt, ...);
+void warnx (const char *fmt, ...);
+void verr (int status, const char *fmt, va_list args);
+void verrx (int status, const char *fmt, va_list args);
+void err (int status, const char *fmt, ...);
+void errx (int status, const char *fmt, ...);
 
-.argc_done:
-	mov	(%rsi), %rax
-	mov	%rax, __progname(%rip)
-
-.no_argv:
-	call	main
-	mov	%eax, %edi
-	call	exit
-ASM_FUNC_END (_start)
+#endif

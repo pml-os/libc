@@ -17,13 +17,21 @@
 #ifndef __SYS_UTMP_H
 #define __SYS_UTMP_H
 
+#include <pml/time.h>
 #include <sys/types.h>
 
-#define UTMP_FILE "/var/run/utmp"
+#define _PATH_UTMP              "/var/run/utmp"
+#define _PATH_WTMP              "/var/log/wtmp"
 
 #define UT_LINESIZE	32
 #define UT_NAMESIZE	32
 #define UT_HOSTSIZE	256
+
+struct exit_status
+{
+  short e_termination;
+  short e_exit;
+};
 
 struct utmp
 {
@@ -33,18 +41,26 @@ struct utmp
   char ut_id[4];
   char ut_user[UT_NAMESIZE];
   char ut_host[UT_HOSTSIZE];
-  char __filler[52];
+  struct exit_status ut_exit;
+  long ut_session;
+  struct timeval ut_tv;
+  int32_t ut_addr_v6[4];
+  char __filler[20];
 };
 
-#define RUN_LVL		1
-#define BOOT_TIME	2
-#define NEW_TIME	3
-#define OLD_TIME	4
+#define ut_name                 ut_user
+#define ut_time                 ut_tv.tv_sec
+#define ut_xtime                ut_tv.tv_sec
+#define ut_addr                 ut_addr_v6[0]
 
-#define INIT_PROCESS	5
-#define LOGIN_PROCESS	6
-#define USER_PROCESS	7
-#define DEAD_PROCESS	8
+#define RUN_LVL		        1
+#define BOOT_TIME	        2
+#define NEW_TIME	        3
+#define OLD_TIME	        4
+#define INIT_PROCESS	        5
+#define LOGIN_PROCESS	        6
+#define USER_PROCESS	        7
+#define DEAD_PROCESS	        8
 
 struct utmp *_getutline (struct utmp *);
 struct utmp *getutent (void);
