@@ -50,7 +50,6 @@ sysconf (int name)
     case _SC_OPEN_MAX:
       return OPEN_MAX;
     case _SC_PAGESIZE:
-    case _SC_PAGE_SIZE:
       return PAGESIZE;
     case _SC_THREAD_DESTRUCTOR_ITERATIONS:
       return PTHREAD_DESTRUCTOR_ITERATIONS;
