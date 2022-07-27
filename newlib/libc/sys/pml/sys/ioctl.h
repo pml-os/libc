@@ -18,7 +18,12 @@
 #define __SYS_IOCTL_H
 
 #include <pml/ioctl.h>
+#include <sys/cdefs.h>
+
+__BEGIN_DECLS
 
 int ioctl (int fd, unsigned long req, ...);
+
+__END_DECLS
 
 #endif

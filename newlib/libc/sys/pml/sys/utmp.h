@@ -18,6 +18,7 @@
 #define __SYS_UTMP_H
 
 #include <pml/time.h>
+#include <sys/cdefs.h>
 #include <sys/types.h>
 
 #define _PATH_UTMP              "/var/run/utmp"
@@ -62,6 +63,8 @@ struct utmp
 #define USER_PROCESS	        7
 #define DEAD_PROCESS	        8
 
+__BEGIN_DECLS
+
 struct utmp *_getutline (struct utmp *);
 struct utmp *getutent (void);
 struct utmp *getutid (struct utmp *);
@@ -70,5 +73,7 @@ void endutent (void);
 void pututline (struct utmp *);
 void setutent (void);
 void utmpname (const char *);
+
+__END_DECLS
 
 #endif

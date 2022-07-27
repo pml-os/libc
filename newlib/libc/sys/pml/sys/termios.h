@@ -18,6 +18,9 @@
 #define __SYS_TERMIOS_H
 
 #include <pml/termios.h>
+#include <sys/cdefs.h>
+
+__BEGIN_DECLS
 
 speed_t cfgetispeed (const struct termios *tp);
 speed_t cfgetospeed (const struct termios *tp);
@@ -33,5 +36,7 @@ int tcsetattr (int fd, int action, const struct termios *tp);
 pid_t tcgetpgrp (int fd);
 int tcsetpgrp (int fd, pid_t pgid);
 pid_t tcgetsid (int fd);
+
+__END_DECLS
 
 #endif
