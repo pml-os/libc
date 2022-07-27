@@ -49,10 +49,6 @@
 #include <sys/select.h>
 #endif
 
-struct timezone {
-	int	tz_minuteswest;	/* minutes west of Greenwich */
-	int	tz_dsttime;	/* type of dst correction */
-};
 #define	DST_NONE	0	/* not on dst */
 #define	DST_USA		1	/* USA style dst */
 #define	DST_AUST	2	/* Australian style dst */
@@ -430,7 +426,7 @@ int setitimer (int __which, const struct itimerval *__restrict __value,
 #endif
 
 int gettimeofday (struct timeval *__restrict __p,
-			  void *__restrict __tz);
+			  struct timezone *__restrict __tz);
 
 #if __GNU_VISIBLE
 int futimesat (int, const char *, const struct timeval [2]);

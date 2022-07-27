@@ -34,13 +34,13 @@ No supporting OS subroutines are directly required.
 #include <_ansi.h>
 #include <stdio.h>
 
-extern ssize_t __getdelim (char **, size_t *, int, FILE *);
+extern ssize_t getdelim (char **, size_t *, int, FILE *);
 
 ssize_t
-__getline (char **lptr,
+getline (char **lptr,
        size_t *n,
        FILE *fp)
 {
-  return __getdelim (lptr, n, '\n', fp);
+  return getdelim (lptr, n, '\n', fp);
 }
 

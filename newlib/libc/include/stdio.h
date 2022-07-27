@@ -528,8 +528,8 @@ int	_vsscanf_r (struct _reent *, const char *__restrict, const char *__restrict,
 /* Other extensions.  */
 
 int	fpurge (FILE *);
-ssize_t __getdelim (char **, size_t *, int, FILE *);
-ssize_t __getline (char **, size_t *, FILE *);
+ssize_t getdelim (char **, size_t *, int, FILE *);
+ssize_t getline (char **, size_t *, FILE *);
 
 #if __MISC_VISIBLE
 void	clearerr_unlocked (FILE *);

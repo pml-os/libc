@@ -661,3 +661,15 @@ uname (struct utsname *buffer)
 {
   return do_syscall (SYS_uname, buffer);
 }
+
+int
+gettimeofday (struct timeval *tv, struct timezone *tz)
+{
+  return do_syscall (SYS_gettimeofday, tv, tz);
+}
+
+int
+settimeofday (const struct timeval *tv, const struct timezone *tz)
+{
+  return do_syscall (SYS_settimeofday, tv, tz);
+}

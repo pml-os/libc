@@ -40,7 +40,7 @@ No supporting OS subroutines are directly required.
 #define DEFAULT_LINE_SIZE 128
 
 ssize_t
-__getdelim (char **bufptr,
+getdelim (char **bufptr,
        size_t *n,
        int delim,
        FILE *fp)
