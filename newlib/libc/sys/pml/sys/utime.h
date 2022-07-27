@@ -1,4 +1,4 @@
-/* utsname.h -- This file is part of PML.
+/* utime.h -- This file is part of PML.
    Copyright (C) 2021 XNSC
 
    PML is free software: you can redistribute it and/or modify
@@ -14,16 +14,19 @@
    You should have received a copy of the GNU General Public License
    along with PML. If not, see <https://www.gnu.org/licenses/>. */
 
-#ifndef __SYS_UTSNAME_H
-#define __SYS_UTSNAME_H
+#ifndef __SYS_UTIME_H
+#define __SYS_UTIME_H
 
-#include <pml/utsname.h>
-#include <sys/cdefs.h>
+struct utimbuf 
+{
+  time_t actime;
+  time_t modtime; 
+};
 
 __BEGIN_DECLS
 
-int uname (struct utsname *buffer);
+int utime (const char *path, const struct utimbuf *times);
 
 __END_DECLS
 
-#endif
+#endif /* _SYS_UTIME_H */

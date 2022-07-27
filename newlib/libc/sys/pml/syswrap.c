@@ -16,9 +16,12 @@
 
 #include <pml/fcntl.h>
 #include <pml/syscall.h>
+#include <sys/time.h>
+#include <sys/stat.h>
 #include <sys/wait.h>
 #include <errno.h>
 #include <limits.h>
+#include <utime.h>
 
 long do_syscall (long num, ...);
 
@@ -209,9 +212,27 @@ open (const char *name, int flags, mode_t mode)
 }
 
 int
+openat (int dirfd, const char *path, int flags, mode_t mode)
+{
+  return do_syscall (SYS_openat, dirfd, path, flags, mode);
+}
+
+int
 close (int fd)
 {
   return do_syscall (SYS_close, fd);
+}
+
+int
+access (const char *path, int mode)
+{
+  return do_syscall (SYS_access, path, mode);
+}
+
+int
+faccessat (int dirfd, const char *path, int mode, int flags)
+{
+  return do_syscall (SYS_faccessat, dirfd, path, mode, flags);
 }
 
 ssize_t
@@ -251,9 +272,33 @@ lstat (const char *path, struct stat *st)
 }
 
 int
+mknod (const char *path, mode_t mode, dev_t dev)
+{
+  return do_syscall (SYS_mknod, path, mode, dev);
+}
+
+int
+mknodat (int dirfd, const char *path, mode_t mode, dev_t dev)
+{
+  return do_syscall (SYS_mknodat, dirfd, path, mode, dev);
+}
+
+int
 mkdir (const char *path, mode_t mode)
 {
   return do_syscall (SYS_mkdir, path, mode);
+}
+
+int
+mkdirat (int dirfd, const char *path, mode_t mode)
+{
+  return do_syscall (SYS_mkdirat, dirfd, path, mode);
+}
+
+int
+rmdir (const char *path)
+{
+  return do_syscall (SYS_rmdir, path);
 }
 
 int
@@ -263,9 +308,24 @@ _rename (const char *old_path, const char *new_path)
 }
 
 int
+renameat (int old_dirfd, const char *old_path, int new_dirfd,
+	  const char *new_path)
+{
+  return do_syscall (SYS_renameat, old_dirfd, old_path, new_dirfd, new_path);
+}
+
+int
 link (const char *old_path, const char *new_path)
 {
   return do_syscall (SYS_link, old_path, new_path);
+}
+
+int
+linkat (int old_dirfd, const char *old_path, int new_dirfd,
+	const char *new_path, int flags)
+{
+  return do_syscall (SYS_linkat, old_dirfd, old_path, new_dirfd, new_path,
+		     flags);
 }
 
 int
@@ -275,9 +335,21 @@ unlink (const char *path)
 }
 
 int
+unlinkat (int dirfd, const char *path, int flags)
+{
+  return do_syscall (SYS_unlinkat, dirfd, path, flags);
+}
+
+int
 symlink (const char *old_path, const char *new_path)
 {
   return do_syscall (SYS_symlink, old_path, new_path);
+}
+
+int
+symlinkat (const char *old_path, int new_dirfd, const char *new_path)
+{
+  return do_syscall (SYS_symlinkat, old_path, new_dirfd, new_path);
 }
 
 ssize_t
@@ -286,10 +358,22 @@ readlink (const char *path, char *buffer, size_t len)
   return do_syscall (SYS_readlink, path, buffer, len);
 }
 
+ssize_t
+readlinkat (int dirfd, const char *path, char *buffer, size_t len)
+{
+  return do_syscall (SYS_readlinkat, dirfd, path, buffer, len);
+}
+
 int
 truncate (const char *path, off_t len)
 {
   return do_syscall (SYS_truncate, path, len);
+}
+
+int
+ftruncate (int fd, off_t len)
+{
+  return do_syscall (SYS_ftruncate, fd, len);
 }
 
 void
@@ -302,6 +386,93 @@ int
 fsync (int fd)
 {
   return do_syscall (SYS_fsync, fd);
+}
+
+int
+utime (const char *path, const struct utimbuf *times)
+{
+  struct timespec buffer[2];
+  buffer[0].tv_sec = times->actime;
+  buffer[1].tv_sec = times->modtime;
+  buffer[0].tv_nsec = buffer[1].tv_nsec = 0;
+  return utimensat (AT_FDCWD, path, buffer, 0);
+}
+
+int
+utimes (const char *path, const struct timeval times[2])
+{
+  struct timespec buffer[2];
+  buffer[0].tv_sec = times[0].tv_sec;
+  buffer[1].tv_sec = times[1].tv_sec;
+  buffer[0].tv_nsec = times[0].tv_usec * 1000;
+  buffer[1].tv_nsec = times[1].tv_usec * 1000;
+  return utimensat (AT_FDCWD, path, buffer, 0);
+}
+
+int
+futimes (int fd, const struct timeval times[2])
+{
+  struct timespec buffer[2];
+  buffer[0].tv_sec = times[0].tv_sec;
+  buffer[1].tv_sec = times[1].tv_sec;
+  buffer[0].tv_nsec = times[0].tv_usec * 1000;
+  buffer[1].tv_nsec = times[1].tv_usec * 1000;
+  return futimens (fd, buffer);
+}
+
+int
+futimens (int fd, const struct timespec times[2])
+{
+  return do_syscall (SYS_futimens, fd, times);
+}
+
+int
+utimensat (int dirfd, const char *path, const struct timespec times[2],
+	   int flags)
+{
+  return do_syscall (SYS_utimensat, dirfd, path, times, flags);
+}
+
+int
+chmod (const char *path, mode_t mode)
+{
+  return do_syscall (SYS_chmod, path, mode);
+}
+
+int
+fchmod (int fd, mode_t mode)
+{
+  return do_syscall (SYS_fchmod, fd, mode);
+}
+
+int
+fchmodat (int dirfd, const char *path, mode_t mode, int flags)
+{
+  return do_syscall (SYS_fchmodat, dirfd, path, mode, flags);
+}
+
+int
+chown (const char *path, uid_t uid, gid_t gid)
+{
+  return do_syscall (SYS_chown, path, uid, gid);
+}
+
+int
+fchown (int fd, uid_t uid, gid_t gid)
+{
+  return do_syscall (SYS_fchown, fd, uid, gid);
+}
+
+int
+lchown (const char *path, uid_t uid, gid_t gid)
+{
+  return do_syscall (SYS_lchown, path, uid, gid);
+}
+
+int
+fchownat (int dirfd, const char *path, uid_t uid, gid_t gid, int flags)
+{
+  return do_syscall (SYS_fchownat, dirfd, path, uid, gid, flags);
 }
 
 int
