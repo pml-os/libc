@@ -1,4 +1,9 @@
-		   README for GNU development tools
+=== NOTE FOR PML VERSION ===
+This version of newlib has modified headers and source code outside of the
+system-dependent directory (newlib/libc/sys/pml). The library will not build
+or function properly if built for a target besides x86_64-*-pml.
+
+README for GNU development tools
 
 This directory contains various GNU compilers, assemblers, linkers, 
 debuggers, etc., plus their support routines, definitions, and documentation.
