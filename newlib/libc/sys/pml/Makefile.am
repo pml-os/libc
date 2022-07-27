@@ -9,6 +9,7 @@ extra_objs =		\
 	errno.o		\
 	fts.o		\
 	sigset.o	\
+	sysconf.o	\
 	syswrap.o	\
 	termios.o	\
 	usyscall.o
@@ -23,6 +24,7 @@ EXTRA_lib_a_SOURCES =	\
 	errno.c		\
 	fts.c		\
 	sigset.c	\
+	sysconf.c	\
 	syswrap.c	\
 	termios.c	\
 	usyscall.S

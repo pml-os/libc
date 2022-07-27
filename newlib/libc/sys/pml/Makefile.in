@@ -69,7 +69,8 @@ LIBRARIES = $(noinst_LIBRARIES)
 ARFLAGS = cru
 lib_a_AR = $(AR) $(ARFLAGS)
 @MAY_SUPPLY_SYSCALLS_TRUE@am__DEPENDENCIES_1 = errno.o fts.o sigset.o \
-@MAY_SUPPLY_SYSCALLS_TRUE@	syswrap.o termios.o usyscall.o
+@MAY_SUPPLY_SYSCALLS_TRUE@	sysconf.o syswrap.o termios.o \
+@MAY_SUPPLY_SYSCALLS_TRUE@	usyscall.o
 am_lib_a_OBJECTS =
 lib_a_OBJECTS = $(am_lib_a_OBJECTS)
 DEFAULT_INCLUDES = -I.@am__isrc@
@@ -202,6 +203,7 @@ noinst_LIBRARIES = lib.a
 @MAY_SUPPLY_SYSCALLS_TRUE@	errno.o		\
 @MAY_SUPPLY_SYSCALLS_TRUE@	fts.o		\
 @MAY_SUPPLY_SYSCALLS_TRUE@	sigset.o	\
+@MAY_SUPPLY_SYSCALLS_TRUE@	sysconf.o	\
 @MAY_SUPPLY_SYSCALLS_TRUE@	syswrap.o	\
 @MAY_SUPPLY_SYSCALLS_TRUE@	termios.o	\
 @MAY_SUPPLY_SYSCALLS_TRUE@	usyscall.o
@@ -213,6 +215,7 @@ EXTRA_lib_a_SOURCES = \
 	errno.c		\
 	fts.c		\
 	sigset.c	\
+	sysconf.c	\
 	syswrap.c	\
 	termios.c	\
 	usyscall.S
@@ -315,6 +318,12 @@ lib_a-sigset.o: sigset.c
 
 lib_a-sigset.obj: sigset.c
 	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-sigset.obj `if test -f 'sigset.c'; then $(CYGPATH_W) 'sigset.c'; else $(CYGPATH_W) '$(srcdir)/sigset.c'; fi`
+
+lib_a-sysconf.o: sysconf.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-sysconf.o `test -f 'sysconf.c' || echo '$(srcdir)/'`sysconf.c
+
+lib_a-sysconf.obj: sysconf.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-sysconf.obj `if test -f 'sysconf.c'; then $(CYGPATH_W) 'sysconf.c'; else $(CYGPATH_W) '$(srcdir)/sysconf.c'; fi`
 
 lib_a-syswrap.o: syswrap.c
 	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-syswrap.o `test -f 'syswrap.c' || echo '$(srcdir)/'`syswrap.c

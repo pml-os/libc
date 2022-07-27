@@ -23,6 +23,7 @@
 
 #define _PATH_UTMP              "/var/run/utmp"
 #define _PATH_WTMP              "/var/log/wtmp"
+#define UTMP_FILE               _PATH_UTMP
 
 #define UT_LINESIZE	32
 #define UT_NAMESIZE	32
