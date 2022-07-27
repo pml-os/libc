@@ -199,6 +199,12 @@ sbrk (ptrdiff_t incr)
   return (void *) do_syscall (SYS_sbrk, incr);
 }
 
+int
+chroot (const char *path)
+{
+  return do_syscall (SYS_chroot, path);
+}
+
 mode_t
 umask (mode_t mask)
 {
@@ -281,6 +287,12 @@ int
 mknodat (int dirfd, const char *path, mode_t mode, dev_t dev)
 {
   return do_syscall (SYS_mknodat, dirfd, path, mode, dev);
+}
+
+int
+mkfifo (const char *path, mode_t mode)
+{
+  return mknod (path, mode | S_IFIFO, 0);
 }
 
 int

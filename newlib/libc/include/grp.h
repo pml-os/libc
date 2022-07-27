@@ -44,16 +44,20 @@
 #ifdef __CYGWIN__
 #include <cygwin/grp.h>
 #endif
+#include <pml/syslimits.h>
 
 #if __BSD_VISIBLE
 #define	_PATH_GROUP		"/etc/group"
 #endif
+
+#define __gr_mem_limit NGROUPS_MAX
 
 struct group {
 	char	*gr_name;		/* group name */
 	char	*gr_passwd;		/* group password */
 	gid_t	gr_gid;			/* group id */
 	char	**gr_mem;		/* group members */
+  char *__gr_memv[__gr_mem_limit];
 };
 
 #ifdef __cplusplus
