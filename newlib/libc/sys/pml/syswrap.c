@@ -597,6 +597,18 @@ getrusage (int who, struct rusage *rusage)
   return do_syscall (SYS_getrusage, who, rusage);
 }
 
+int
+getpriority (int which, id_t who)
+{
+  return do_syscall (SYS_getpriority, which, who);
+}
+
+int
+setpriority (int which, id_t who, int prio)
+{
+  return do_syscall (SYS_setpriority, which, who, prio);
+}
+
 pid_t
 wait (int *status)
 {

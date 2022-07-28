@@ -68,9 +68,9 @@ CONFIG_CLEAN_VPATH_FILES =
 LIBRARIES = $(noinst_LIBRARIES)
 ARFLAGS = cru
 lib_a_AR = $(AR) $(ARFLAGS)
-@MAY_SUPPLY_SYSCALLS_TRUE@am__DEPENDENCIES_1 = errno.o fts.o sigset.o \
-@MAY_SUPPLY_SYSCALLS_TRUE@	sysconf.o syswrap.o termios.o \
-@MAY_SUPPLY_SYSCALLS_TRUE@	usyscall.o
+@MAY_SUPPLY_SYSCALLS_TRUE@am__DEPENDENCIES_1 = errno.o fts.o \
+@MAY_SUPPLY_SYSCALLS_TRUE@	realpath.o sigset.o sysconf.o \
+@MAY_SUPPLY_SYSCALLS_TRUE@	syswrap.o termios.o usyscall.o
 am_lib_a_OBJECTS =
 lib_a_OBJECTS = $(am_lib_a_OBJECTS)
 DEFAULT_INCLUDES = -I.@am__isrc@
@@ -202,6 +202,7 @@ noinst_LIBRARIES = lib.a
 @MAY_SUPPLY_SYSCALLS_TRUE@extra_objs = \
 @MAY_SUPPLY_SYSCALLS_TRUE@	errno.o		\
 @MAY_SUPPLY_SYSCALLS_TRUE@	fts.o		\
+@MAY_SUPPLY_SYSCALLS_TRUE@	realpath.o	\
 @MAY_SUPPLY_SYSCALLS_TRUE@	sigset.o	\
 @MAY_SUPPLY_SYSCALLS_TRUE@	sysconf.o	\
 @MAY_SUPPLY_SYSCALLS_TRUE@	syswrap.o	\
@@ -214,6 +215,7 @@ EXTRA_lib_a_SOURCES = \
 	crt0.S		\
 	errno.c		\
 	fts.c		\
+	realpath.c	\
 	sigset.c	\
 	sysconf.c	\
 	syswrap.c	\
@@ -312,6 +314,12 @@ lib_a-fts.o: fts.c
 
 lib_a-fts.obj: fts.c
 	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-fts.obj `if test -f 'fts.c'; then $(CYGPATH_W) 'fts.c'; else $(CYGPATH_W) '$(srcdir)/fts.c'; fi`
+
+lib_a-realpath.o: realpath.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-realpath.o `test -f 'realpath.c' || echo '$(srcdir)/'`realpath.c
+
+lib_a-realpath.obj: realpath.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-realpath.obj `if test -f 'realpath.c'; then $(CYGPATH_W) 'realpath.c'; else $(CYGPATH_W) '$(srcdir)/realpath.c'; fi`
 
 lib_a-sigset.o: sigset.c
 	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-sigset.o `test -f 'sigset.c' || echo '$(srcdir)/'`sigset.c

@@ -16,7 +16,7 @@ struct timeval;
 
 int
 _gettimeofday (struct timeval  *ptimeval,
-        void *ptimezone)
+        struct timezone *ptimezone)
 {
   errno = ENOSYS;
   return -1;

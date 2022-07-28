@@ -23,6 +23,8 @@
 __BEGIN_DECLS
 
 int getrusage (int who, struct rusage *rusage);
+int getpriority (int who, id_t which);
+int setpriority (int who, id_t which, int prio);
 
 __END_DECLS
 

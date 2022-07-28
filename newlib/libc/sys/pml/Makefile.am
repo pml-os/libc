@@ -8,6 +8,7 @@ if MAY_SUPPLY_SYSCALLS
 extra_objs =		\
 	errno.o		\
 	fts.o		\
+	realpath.o	\
 	sigset.o	\
 	sysconf.o	\
 	syswrap.o	\
@@ -23,6 +24,7 @@ EXTRA_lib_a_SOURCES =	\
 	crt0.S		\
 	errno.c		\
 	fts.c		\
+	realpath.c	\
 	sigset.c	\
 	sysconf.c	\
 	syswrap.c	\
