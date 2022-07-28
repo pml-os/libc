@@ -303,6 +303,12 @@ lstat (const char *path, struct stat *st)
 }
 
 int
+fstatat (int dirfd, const char *path, struct stat *st, int flags)
+{
+  return do_syscall (SYS_fstatat, dirfd, path, st, flags);
+}
+
+int
 mknod (const char *path, mode_t mode, dev_t dev)
 {
   return do_syscall (SYS_mknod, path, mode, dev);
@@ -715,4 +721,16 @@ int
 adjtime (const struct timeval *delta, struct timeval *old_delta)
 {
   return 0; /* TODO Implement */
+}
+
+ssize_t
+getrandom (void *buffer, size_t len, unsigned int flags)
+{
+  return do_syscall (SYS_getrandom, buffer, len, flags);
+}
+
+int
+getentropy (void *buffer, size_t len)
+{
+  return (getrandom (buffer, len, 0) == len) - 1;
 }

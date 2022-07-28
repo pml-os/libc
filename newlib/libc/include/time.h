@@ -185,10 +185,6 @@ int timer_settime (timer_t timerid, int flags,
 int timer_gettime (timer_t timerid, struct itimerspec *value);
 int timer_getoverrun (timer_t timerid);
 
-/* High Resolution Sleep, P1003.1b-1993, p. 269 */
-
-int nanosleep (const struct timespec  *rqtp, struct timespec *rmtp);
-
 #ifdef __cplusplus
 }
 #endif
@@ -304,6 +300,10 @@ int clock_setenable_attr (clockid_t clock_id, int attr);
 int clock_getenable_attr (clockid_t clock_id, int *attr);
 
 #endif /* _POSIX_CPUTIME or _POSIX_THREAD_CPUTIME */
+
+/* High Resolution Sleep, P1003.1b-1993, p. 269 */
+
+int nanosleep (const struct timespec  *rqtp, struct timespec *rmtp);
 
 #ifdef __cplusplus
 }

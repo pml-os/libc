@@ -113,6 +113,8 @@ uid_t   geteuid (void);
 gid_t   getgid (void);
 #endif
 int     getgroups (int __gidsetsize, gid_t __grouplist[]);
+int     getgrouplist (const char *user, gid_t group, gid_t *groups,
+		      int *ngroups);
 #if __BSD_VISIBLE || __XSI_VISIBLE >= 4
 long    gethostid (void);
 #endif
