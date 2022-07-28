@@ -200,6 +200,31 @@ sbrk (ptrdiff_t incr)
 }
 
 int
+mount (const char *source, const char *target, const char *fstype,
+	   unsigned long flags, const void *data)
+{
+  return do_syscall (SYS_mount, source, target, fstype, flags, data);
+}
+
+int
+umount (const char *target)
+{
+  return do_syscall (SYS_umount, target);
+}
+
+int
+statvfs (const char *path, struct statvfs *st)
+{
+  return do_syscall (SYS_statvfs, path, st);
+}
+
+int
+fstatvfs (int fd, struct statvfs *st)
+{
+  return do_syscall (SYS_fstatvfs, fd, st);
+}
+
+int
 chroot (const char *path)
 {
   return do_syscall (SYS_chroot, path);
