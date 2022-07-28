@@ -673,3 +673,9 @@ settimeofday (const struct timeval *tv, const struct timezone *tz)
 {
   return do_syscall (SYS_settimeofday, tv, tz);
 }
+
+int
+adjtime (const struct timeval *delta, struct timeval *old_delta)
+{
+  return 0; /* TODO Implement */
+}
