@@ -17,6 +17,7 @@ LIB_SOURCES = \
 	lcltime.c	\
 	lcltime_r.c	\
 	mktime.c	\
+	timegm.c	\
 	month_lengths.c \
 	strftime.c  	\
 	strptime.c	\
@@ -54,6 +55,7 @@ CHEWOUT_FILES = \
 	gmtime.def	\
 	lcltime.def	\
 	mktime.def	\
+	timegm.def	\
 	strftime.def	\
 	time.def	\
 	tzlock.def	\

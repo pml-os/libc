@@ -122,6 +122,7 @@ time/gmtime.c
 time/localtime.c
 time/mktime.c
 time/strftime.c
+time/timegm.c
 
 
 load stdio/fiprintf.c

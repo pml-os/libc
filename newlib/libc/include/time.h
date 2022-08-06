@@ -56,6 +56,7 @@ struct tm
 clock_t	   clock (void);
 double	   difftime (time_t _time2, time_t _time1);
 time_t	   mktime (struct tm *_timeptr);
+time_t     timegm (struct tm *_timeptr);
 time_t	   time (time_t *_timer);
 #ifndef _REENT_ONLY
 char	  *asctime (const struct tm *_tblock);

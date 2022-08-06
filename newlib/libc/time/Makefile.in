@@ -80,6 +80,7 @@ am__objects_1 = lib_a-asctime.$(OBJEXT) lib_a-asctime_r.$(OBJEXT) \
 	lib_a-lcltime_r.$(OBJEXT) lib_a-mktime.$(OBJEXT) \
 	lib_a-month_lengths.$(OBJEXT) lib_a-strftime.$(OBJEXT) \
 	lib_a-strptime.$(OBJEXT) lib_a-time.$(OBJEXT) \
+	lib_a-timegm.$(OBJEXT) \
 	lib_a-tzcalc_limits.$(OBJEXT) lib_a-tzlock.$(OBJEXT) \
 	lib_a-tzset.$(OBJEXT) lib_a-tzset_r.$(OBJEXT) \
 	lib_a-tzvars.$(OBJEXT) lib_a-wcsftime.$(OBJEXT)
@@ -90,7 +91,8 @@ libtime_la_LIBADD =
 am__objects_2 = asctime.lo asctime_r.lo clock.lo ctime.lo ctime_r.lo \
 	difftime.lo gettzinfo.lo gmtime.lo gmtime_r.lo lcltime.lo \
 	lcltime_r.lo mktime.lo month_lengths.lo strftime.lo \
-	strptime.lo time.lo tzcalc_limits.lo tzlock.lo tzset.lo \
+	strptime.lo time.lo timegm.lo \
+	tzcalc_limits.lo tzlock.lo tzset.lo \
 	tzset_r.lo tzvars.lo wcsftime.lo
 @USE_LIBTOOL_TRUE@am_libtime_la_OBJECTS = $(am__objects_2)
 libtime_la_OBJECTS = $(am_libtime_la_OBJECTS)
@@ -282,6 +284,7 @@ LIB_SOURCES = \
 	strftime.c  	\
 	strptime.c	\
 	time.c		\
+	timegm.c	\
 	tzcalc_limits.c \
 	tzlock.c	\
 	tzset.c		\
@@ -462,6 +465,12 @@ lib_a-mktime.o: mktime.c
 
 lib_a-mktime.obj: mktime.c
 	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-mktime.obj `if test -f 'mktime.c'; then $(CYGPATH_W) 'mktime.c'; else $(CYGPATH_W) '$(srcdir)/mktime.c'; fi`
+
+lib_a-timegm.o: timegm.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-timegm.o `test -f 'timegm.c' || echo '$(srcdir)/'`timegm.c
+
+lib_a-timegm.obj: timegm.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-timegm.obj `if test -f 'timegm.c'; then $(CYGPATH_W) 'timegm.c'; else $(CYGPATH_W) '$(srcdir)/timegm.c'; fi`
 
 lib_a-month_lengths.o: month_lengths.c
 	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-month_lengths.o `test -f 'month_lengths.c' || echo '$(srcdir)/'`month_lengths.c

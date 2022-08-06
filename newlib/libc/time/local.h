@@ -39,3 +39,8 @@ void _tzset_unlocked (void);
 void __tz_lock (void);
 void __tz_unlock (void);
 
+time_t __timegm_internal (struct tm *tim_p);
+void __set_tm_wday (long days, struct tm *tim_p);
+void __validate_tm_structure (struct tm *tim_p);
+
+int __days_in_year (int year);
