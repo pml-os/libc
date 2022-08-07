@@ -29,6 +29,7 @@ ASM_FUNC_BEGIN (do_syscall):
 	mov	%r8, %r10
 	mov	%r9, %r8
 	mov	8(%rbp), %r9
+	clc
 	syscall
 	jnc	.end
 
